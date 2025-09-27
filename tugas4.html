@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Penyewaan Kendaraan</title>
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI",sans-serif;}
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px; color:#fff;
+    }
+    h1 {margin-bottom:20px; font-size:2rem; text-shadow:2px 2px 8px rgba(0,0,0,0.5);}
+    .container {
+      width:100%; max-width:900px;
+      background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(12px);
+      border-radius:16px; padding:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    }
+    form {
+      display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:10px; margin-bottom:20px;
+    }
+    input, button {
+      padding:10px; border:none; border-radius:8px; font-size:0.9rem;
+    }
+    input {background:rgba(255,255,255,0.9);}
+    button {
+      background:#00c6ff; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s;
+    }
+    button:hover {background:#0072ff;}
+    table {width:100%; border-collapse:collapse; text-align:center;}
+    th,td {padding:12px; border-bottom:1px solid rgba(255,255,255,0.3);}
+    th {background:rgba(0,0,0,0.3);}
+    tr:hover {background:rgba(255,255,255,0.15);}
+    @media(max-width:768px){
+      form {grid-template-columns:1fr;}
+      button {width:100%;}
+    }
+  </style>
+</head>
+<body>
+  <h1>🚗 Sistem Manajemen Penyewaan Kendaraan</h1>
+  <div class="container">
+    <form id="formPenyewa">
+      <input type="text" id="nama" placeholder="Nama Penyewa" required>
+      <input type="text" id="nomorTelepon" placeholder="Nomor Telepon" required>
+      <input type="text" id="kendaraanDisewa" placeholder="Kendaraan Disewa" required>
+      <button type="submit">Tambah</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nama</th>
+          <th>Nomor Telepon</th>
+          <th>Kendaraan</th>
+        </tr>
+      </thead>
+      <tbody id="tabelPenyewa">
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function Penyewa(id, nama, nomorTelepon, kendaraanDisewa) {
+      this.id = id;
+      this.nama = nama;
+      this.nomorTelepon = nomorTelepon;
+      this.kendaraanDisewa = kendaraanDisewa;
+    }
+
+    let daftarPenyewa = [
+      new Penyewa(1,"Fanny","081456755678","Ferrari"),
+      new Penyewa(2,"Moudy","083445233456","Lamborghini"),
+      new Penyewa(3,"Firly","085635677899","Toyota")
+    ];
+
+    Penyewa.prototype.tambahPenyewa = function(nama, nomorTelepon, kendaraanDisewa) {
+      const idBaru = daftarPenyewa.length > 0 ? daftarPenyewa[daftarPenyewa.length-1].id + 1 : 1;
+      const penyewaBaru = new Penyewa(idBaru, nama, nomorTelepon, kendaraanDisewa);
+      daftarPenyewa.push(penyewaBaru);
+      tampilkanPenyewa();
+    };
+
+    function tampilkanPenyewa() {
+      const tbody = document.getElementById("tabelPenyewa");
+      tbody.innerHTML = "";
+      daftarPenyewa.forEach(p => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${p.id}</td>
+            <td>${p.nama}</td>
+            <td>${p.nomorTelepon}</td>
+            <td>${p.kendaraanDisewa}</td>
+          </tr>
+        `;
+      });
+    }
+
+    document.getElementById("formPenyewa").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value;
+      const nomorTelepon = document.getElementById("nomorTelepon").value;
+      const kendaraanDisewa = document.getElementById("kendaraanDisewa").value;
+
+      daftarPenyewa[0].tambahPenyewa(nama, nomorTelepon, kendaraanDisewa);
+
+      this.reset();
+    });
+
+    tampilkanPenyewa();
+  </script>
+</body>
+</html>

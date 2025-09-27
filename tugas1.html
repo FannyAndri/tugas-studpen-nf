@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.write("Belajar JavaScript");
+        document.write("<br/>Menghitung Luas Persegi Panjang");
+        let panjang = parseInt(prompt("Masukkan panjang:"));
+        let lebar = parseInt(prompt("Masukkan lebar:"));
+        let luasPersegiPanjang = panjang * lebar;
+        document.write("<br/>Luas persegi panjang dengan panjang " + panjang + " dan lebar " + lebar + " adalah = " + luasPersegiPanjang);
+        document.write("<br/>Menghitung Luas Bujur Sangkar");
+        let sisi = parseInt(prompt("Masukkan sisi:"));
+        let luasBujurSangkar = sisi * sisi;
+        document.write("<br/>Luas bujur sangkar dengan " + sisi + " adalah = " + luasBujurSangkar);
+        document.write("<br/>Menghitung Luas Segitiga");
+        let alas = parseInt(prompt("Masukkan alas:"));
+        let tinggi = parseInt(prompt("Masukkan tinggi:"));
+        let luasSegitiga = alas * tinggi / 2;
+        document.write("<br/>Luas segitiga dengan alas " + alas + " dan tinggi " + tinggi + " adalah = " + luasSegitiga);
+    </script>
+</body>
+</html>
